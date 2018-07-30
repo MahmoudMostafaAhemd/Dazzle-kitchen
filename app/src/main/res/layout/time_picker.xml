@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <hu.bugadani.circlepickerlib.CirclePickerView
+        android:id="@+id/steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:interactive="true"
+        app:label="Min"
+        app:labelColor="@android:color/secondary_text_dark"
+        app:labelSize="17sp"
+        app:max="90"
+        app:min="0"
+        app:step="5"
+        app:textSize="17sp"
+        app:showValueText="true"
+        app:wheelActiveColor="@color/colorAccent"
+        app:wheelBackgroundColor="@android:color/secondary_text_dark"
+        app:wheelRadius="@dimen/_50sdp"
+        app:wheelStrokeWidth="@dimen/_6sdp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/steps"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/ok"
+        android:textColor="@color/white" />
+</RelativeLayout>

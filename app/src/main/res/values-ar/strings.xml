@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dazzle Kitchen</string>
+    <string name="welcome_msg">مرحبا بك في دازل</string>
+    <string name="login_msg">تسجيل الدخول</string>
+    <string name="login_number_hint">رقم هاتفك</string>
+    <string name="user_name_hint">اسم المستخدم</string>
+    <string name="password_hint">كلمه المرور</string>
+    <string name="please_wait_msg">انتظر من فضلك</string>
+    <string name="recieve_sms_button">أرسال رسالة</string>
+    <string name="login">الدخول</string>
+    <string name="skip">تخطي</string>
+    <string name="invalid_email_msg">من فضلك ادخل بريد اليكتروني صحيح</string>
+    <string name="empty_password_msg">من فضلك ادخل كلمه مرور صحيحة</string>
+    <string name="order_id">طلب #</string>
+    <string name="special_comments">تعليقات خاصة</string>
+    <string name="queue">Queue</string>
+    <string name="in_progress">In progress</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+    <string name="complete_order_confirmaion">هل تريد اغلاق الطلب ؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="orders">الطلبات</string>
+    <string name="Notification">الاشعارات</string>
+    <string name="no_active_orders">لا يوجد طلبات</string>
+    <string name="no_calls">لا يوجد اشعارات جديدة</string>
+    <string name="ok">Ok</string>
+    <string name="set_time">Set time</string>
+</resources>

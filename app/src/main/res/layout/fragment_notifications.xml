@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".home.fragment.NotificationsFragment">
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="@dimen/_16sdp"
+        android:drawableTop="@drawable/ic_no_order"
+        android:text="@string/no_calls"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+    <hu.bugadani.circlepickerlib.CirclePickerView
+        android:id="@+id/steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:label="Min"
+        app:wheelActiveColor="@color/colorAccent"
+        app:wheelBackgroundColor="@android:color/secondary_text_dark"
+        app:labelColor="@android:color/secondary_text_dark"
+        app:labelSize="17sp"
+        android:layout_gravity="center"
+        app:max="90"
+        app:min="0"
+        app:step="5"
+        app:wheelRadius="@dimen/_50sdp"/>
+
+</FrameLayout>

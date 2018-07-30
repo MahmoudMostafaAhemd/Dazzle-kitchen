@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryDark">#ff131313</color>
+    <color name="colorAccent">#ffe66400</color>
+    <color name="safety_orange">#ffe66400</color>
+    <color name="gray">#C8C8C8</color>
+    <color name="taupe_gray">#ff8d8d8d</color>
+    <color name="sandy_brown">#ffffa25a</color>
+    <color name="centerShadow">#1e000000</color>
+    <color name="colorShadow">#6a000000</color>
+    <color name="white">#fff</color>
+    <color name="davy_gray">#ff5f5f5f</color>
+    <color name="munsell">#fff2f2f2</color>
+</resources>

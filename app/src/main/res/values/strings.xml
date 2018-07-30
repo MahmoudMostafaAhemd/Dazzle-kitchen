@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Dazzle Kitchen</string>
+
+    <string name="welcome_msg">Welcome Back to DAZZLE</string>
+    <string name="login_msg">Login to your account</string>
+    <string name="login_number_hint">Your Number</string>
+    <string name="recieve_sms_button">Receive SMS</string>
+    <string name="user_name_hint">User name</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="skip">skip</string>
+    <string name="invalid_email_msg">Please enter valid Email</string>
+    <string name="empty_password_msg">Please enter your password</string>
+    <string name="please_wait_msg">Please Wait</string>
+    <string name="order_id">Order #</string>
+    <string name="special_comments">Special Comments</string>
+    <string name="queue">Queue</string>
+    <string name="in_progress">In progress</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+    <string name="complete_order_confirmaion">Do you want to close the order ?</string>
+
+    <string name="orders">Orders</string>
+    <string name="Notification">Notifications</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_active_orders">No active Orders</string>
+    <string name="no_calls">There is no new notifications</string>
+    <string name="ok">Ok</string>
+    <string name="set_time">Set time</string>
+</resources>
+
