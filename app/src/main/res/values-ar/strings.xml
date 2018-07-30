@@ -27,4 +27,6 @@
     <string name="no_calls">لا يوجد اشعارات جديدة</string>
     <string name="ok">Ok</string>
     <string name="set_time">Set time</string>
+    <string name="notification">Table number</string>
+    <string name="notificaion_complete_msg">is waiting you</string>
 </resources>

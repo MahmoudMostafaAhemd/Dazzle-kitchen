@@ -5,14 +5,15 @@ import com.example.mahmouddiab.dazzlekitchen.model.OrderDoneModel;
 import com.example.mahmouddiab.dazzlekitchen.model.OrdersModel;
 
 public interface OrderView {
-
-    void onGetOrderSuccess(OrdersModel ordersModel);
+    void onCloseSuccess(OrderDoneModel orderDoneModel);
 
     void onDoneSuccess(OrderDoneModel orderDoneModel);
 
+    void onGetOrderFailed(Error error);
+
+    void onGetOrderSuccess(OrdersModel ordersModel);
+
     void onInProgressSuccess(OrderDoneModel orderDoneModel);
 
-    void onCloseSuccess(OrderDoneModel orderDoneModel);
-
-    void onGetOrderFailed(Error error);
+    void onTakenRigestered(OrderDoneModel orderDoneModel);
 }

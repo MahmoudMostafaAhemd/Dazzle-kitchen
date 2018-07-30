@@ -1,13 +1,15 @@
 package com.example.mahmouddiab.dazzlekitchen.orders;
 
 public interface OrderPresenter {
+    void getOrders(String str);
 
-    void getOrders(String authorization);
+    void onCloseClicked(String str, int i);
 
-    void onDoneClicked(String authorization, int id);
+    void onDoneClicked(String str, int i);
 
-    void onInProgressClicked(String authorization, int id);
+    void onInProgressClicked(String str, int i);
 
-    void onCloseClicked(String authorization, int id);
+    void onRegisterToken(String str, String str2, String str3);
 
+    void onSubmitWaitingTime(String str, int i, String str2);
 }
