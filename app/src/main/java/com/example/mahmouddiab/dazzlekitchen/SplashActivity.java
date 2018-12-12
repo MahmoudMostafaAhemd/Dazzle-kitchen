@@ -9,15 +9,21 @@ import android.text.TextUtils;
 import com.example.mahmouddiab.dazzlekitchen.authentication.AuthenticationActivity;
 import com.example.mahmouddiab.dazzlekitchen.home.WaiterUserActivity;
 import com.example.mahmouddiab.dazzlekitchen.userManegment.UserManager;
-import com.example.mahmouddiab.dazzlekitchen.utils.App;
 import com.example.mahmouddiab.dazzlekitchen.utils.PrefsManager;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private String notificationType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        App.changeLang(this);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("type"))) {
+            notificationType = getIntent().getStringExtra("type");
+        } else {
+            notificationType = "2";
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -27,9 +33,10 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     if (UserManager.getInstance().getUser().getData().getRole().equalsIgnoreCase("ROLE_WAITER")) {
-                        WaiterUserActivity.start(getApplicationContext());
+
+                        WaiterUserActivity.start(SplashActivity.this, notificationType);
                     } else {
-                        MainActivity.start(getApplicationContext());
+                        MainActivity.start(SplashActivity.this);
                     }
                 }
                 finish();

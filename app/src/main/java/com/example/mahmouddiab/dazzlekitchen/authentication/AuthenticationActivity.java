@@ -75,7 +75,7 @@ public class AuthenticationActivity extends AppCompatActivity implements LoginVi
         UserManager.getInstance().addUser(userModel);
         progressDialog.cancel();
         if (userModel.getData().getRole().equalsIgnoreCase("ROLE_WAITER"))
-            WaiterUserActivity.start(this);
+            WaiterUserActivity.start(this,"2");
         else
             MainActivity.start(this);
         finish();

@@ -37,7 +37,42 @@
             android:textSize="16sp"
             tools:text="French Fries" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/additions_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="@string/additions"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp" />
 
+    <TextView
+        android:id="@+id/additions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/additions"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/removal_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/removal"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/removal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="@string/removal"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
     <TextView
         android:id="@+id/comments"
         android:layout_width="match_parent"

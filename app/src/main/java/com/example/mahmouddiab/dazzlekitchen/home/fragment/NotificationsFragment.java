@@ -1,6 +1,7 @@
 package com.example.mahmouddiab.dazzlekitchen.home.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,10 +22,13 @@ import com.example.mahmouddiab.dazzlekitchen.model.Error;
 import com.example.mahmouddiab.dazzlekitchen.model.NotificationData;
 import com.example.mahmouddiab.dazzlekitchen.model.NotificationModel;
 import com.example.mahmouddiab.dazzlekitchen.userManegment.UserManager;
+import com.example.mahmouddiab.dazzlekitchen.utils.Utils;
 import com.example.mahmouddiab.dazzlekitchen.utils.WrapContentLinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +43,7 @@ public class NotificationsFragment extends Fragment implements NotificationView 
     RecyclerView recyclerView;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefreshLayout;
+    final Handler handler = new Handler();
 
     public static NotificationsFragment getInstance() {
         return new NotificationsFragment();
@@ -61,9 +66,33 @@ public class NotificationsFragment extends Fragment implements NotificationView 
         this.swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.onGetNotifications(UserManager.getInstance().getUser().getData().getToken());
+                if (Utils.isNetworkAvailable(getContext()))
+                    presenter.onGetNotifications(UserManager.getInstance().getUser().getData().getToken());
+                else {
+                    Utils.showLongToast(getContext(), getString(R.string.no_net));
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
+
+        Timer timer = new Timer();
+        TimerTask doAsynchronousTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @SuppressWarnings("unchecked")
+                    public void run() {
+                        try {
+                            if (Utils.isNetworkAvailable(getContext()))
+                                presenter.onGetNotifications(UserManager.getInstance().getUser().getData().getToken());
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(doAsynchronousTask, 0, 10000);
     }
 
     @Override
@@ -79,6 +108,7 @@ public class NotificationsFragment extends Fragment implements NotificationView 
         this.swipeRefreshLayout.setRefreshing(false);
         if (this.notificationModel.isEmpty()) {
             this.emptyText.setVisibility(View.VISIBLE);
+            emptyText.setText(getString(R.string.no_active_orders));
         } else {
             this.emptyText.setVisibility(View.GONE);
         }
@@ -87,5 +117,7 @@ public class NotificationsFragment extends Fragment implements NotificationView 
 
     @Override
     public void onGetNotificationError(Error error) {
+        this.emptyText.setVisibility(View.VISIBLE);
+        emptyText.setText(getString(R.string.no_net));
     }
 }

@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "327457172601-ppmiv79ahek0a6fsks22e66ql7mrpsba.apps.googleusercontent.com",
+          "client_id": "327457172601-eh7m7lake193spi4s1ieukk2gdlneojr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dazzle.dazzle",
-            "certificate_hash": "01b09e8c3a9ab521210d6b0b42acc5d2968952bf"
+            "certificate_hash": "85013c9282b1fb71b5b7025e15a67b26e8cf75e1"
+          }
+        },
+        {
+          "client_id": "327457172601-lvlujjrifnsvoa70eikgkv6mevgpvj7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dazzle.dazzle",
+            "certificate_hash": "15bcc0ddf48d74aaddf576a447ad390a4c91d3cc"
+          }
+        },
+        {
+          "client_id": "327457172601-hctk71d3e957rdv7u5nfvjl6ppltiq80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dazzle.dazzle",
+            "certificate_hash": "df558eeb54da0d4dc899aaae206dfed478e7c005"
           }
         },
         {
@@ -44,10 +60,10 @@
               "client_type": 3
             },
             {
-              "client_id": "327457172601-j59rst34u0mter38k3jrsa5e1dm99mtm.apps.googleusercontent.com",
+              "client_id": "327457172601-etuo15qgvlq5c573me2ala1u4n3ghrg1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.nassiance.Dazzle"
+                "bundle_id": "com.AdvanceThings.Dazzle"
               }
             }
           ]

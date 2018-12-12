@@ -1,7 +1,9 @@
 package com.example.mahmouddiab.dazzlekitchen.userManegment;
 
 import android.support.annotation.Nullable;
+
 import com.example.mahmouddiab.dazzlekitchen.model.UserModel;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
 
@@ -18,7 +20,7 @@ public class UserManager {
         userCache = new UserCache();
     }
 
-    public void setIsSkip(boolean isSkip){
+    public void setIsSkip(boolean isSkip) {
 
     }
 
@@ -44,16 +46,16 @@ public class UserManager {
             e.printStackTrace();
         }
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-////                    FirebaseInstanceId.getInstance().deleteInstanceId();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FirebaseInstanceId.getInstance().deleteInstanceId();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         currentUser = null;
     }

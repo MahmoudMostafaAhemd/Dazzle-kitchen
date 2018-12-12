@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.provider.Settings;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -20,6 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         Paper.init(this);
         PrefsManager.init(this);
         userId = Settings.Secure.getString(getContentResolver(),

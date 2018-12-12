@@ -3,6 +3,7 @@ package com.example.mahmouddiab.dazzlekitchen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -32,6 +33,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OrderView, OnActi
     private SectionedRecyclerViewAdapter sectionAdapter;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefreshLayout;
+    final Handler handler = new Handler();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,25 @@ public class MainActivity extends AppCompatActivity implements OrderView, OnActi
                 orderPresenter.onRegisterToken(UserManager.getInstance().getUser().getData().getToken(), App.getClientId(), (task.getResult()).getToken());
             }
         });
+
+        Timer timer = new Timer();
+        TimerTask doAsynchronousTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @SuppressWarnings("unchecked")
+                    public void run() {
+                        try {
+                            orderPresenter.getOrders(UserManager.getInstance().getUser().getData().getToken());
+                        }
+                        catch (Exception e) {
+                            // TODO Auto-generated catch block
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(doAsynchronousTask, 0, 10000);
     }
 
     @OnClick({R.id.logout})

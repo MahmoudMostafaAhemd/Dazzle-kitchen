@@ -14,6 +14,7 @@ import com.example.mahmouddiab.dazzlekitchen.userManegment.UserManager;
 import com.example.mahmouddiab.dazzlekitchen.views.TimePickerView;
 import com.example.mahmouddiab.dazzlekitchen.views.TimePickerView.OnOkClicked;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
@@ -64,12 +65,20 @@ public class SingleSection extends StatelessSection implements OnOkClicked {
         private final TextView comments;
         private final TextView itemName;
         private final TextView itemsNum;
+        private final TextView additionTitle;
+        private final TextView addition;
+        private final TextView removalTitle;
+        private final TextView removal;
 
         public MyItemViewHolder(View itemView) {
             super(itemView);
             this.itemsNum = itemView.findViewById(R.id.items_num);
             this.itemName = itemView.findViewById(R.id.item_name);
             this.comments = itemView.findViewById(R.id.comments);
+            additionTitle = itemView.findViewById(R.id.additions_title);
+            addition = itemView.findViewById(R.id.additions);
+            removalTitle = itemView.findViewById(R.id.removal_title);
+            removal = itemView.findViewById(R.id.removal);
         }
     }
 
@@ -95,10 +104,57 @@ public class SingleSection extends StatelessSection implements OnOkClicked {
         itemHolder.itemsNum.setText(String.valueOf((dishes.get(position)).getQuantity()));
         if (TextUtils.isEmpty((dishes.get(position)).getComment())) {
             itemHolder.comments.setVisibility(View.GONE);
-            return;
+        } else {
+            itemHolder.comments.setVisibility(View.VISIBLE);
+            itemHolder.comments.setText((dishes.get(position)).getComment());
         }
-        itemHolder.comments.setVisibility(View.VISIBLE);
-        itemHolder.comments.setText((dishes.get(position)).getComment());
+
+        if (dishes.get(position).getAdditions().isEmpty()) {
+            itemHolder.addition.setVisibility(View.GONE);
+            itemHolder.additionTitle.setVisibility(View.GONE);
+        } else {
+            itemHolder.addition.setVisibility(View.VISIBLE);
+            itemHolder.additionTitle.setVisibility(View.VISIBLE);
+            ArrayList<String> additions= new ArrayList<>();
+            for(int i = 0; i < dishes.get(position).getAdditions().size(); i++){
+                if(!additions.contains(dishes.get(position).getAdditions().get(i).getName())){
+                    additions.add(dishes.get(position).getAdditions().get(i).getName());
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("(");
+            for (int i = 0; i < additions.size(); i++) {
+                sb.append(additions.get(i));
+                if (i != additions.size() - 1) {
+                    String prefix = ", ";
+                    sb.append(prefix);
+                }
+
+            }
+            sb.append(")");
+            itemHolder.addition.setText(sb.toString());
+        }
+
+        if (dishes.get(position).getRemovals().isEmpty()) {
+            itemHolder.removal.setVisibility(View.GONE);
+            itemHolder.removalTitle.setVisibility(View.GONE);
+        } else {
+            itemHolder.removal.setVisibility(View.VISIBLE);
+            itemHolder.removalTitle.setVisibility(View.VISIBLE);
+            StringBuilder sb = new StringBuilder();
+            sb.append("(");
+            for (int i = 0; i < dishes.get(position).getRemovals().size(); i++) {
+                sb.append(dishes.get(position).getRemovals().get(i).getName());
+                sb.append(" ");
+                sb.append(dishes.get(position).getRemovals().get(i).getPrice());
+                if (i != dishes.get(position).getRemovals().size() - 1) {
+                    String prefix = " , ";
+                    sb.append(prefix);
+                }
+            }
+            sb.append(")");
+            itemHolder.removal.setText(sb.toString());
+        }
     }
 
     public void onBindHeaderViewHolder(ViewHolder holder) {

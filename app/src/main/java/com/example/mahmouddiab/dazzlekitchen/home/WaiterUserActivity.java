@@ -1,11 +1,11 @@
 package com.example.mahmouddiab.dazzlekitchen.home;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.mahmouddiab.dazzlekitchen.R;
 import com.example.mahmouddiab.dazzlekitchen.adapter.PagerAdapter;
@@ -31,10 +31,14 @@ public class WaiterUserActivity extends AppCompatActivity {
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        if (getIntent().getStringExtra("type").equals("1")) {
+            viewPager.setCurrentItem(1);
+        }
     }
 
-    public static void start(Context context) {
+    public static void start(Activity context, String type) {
         Intent starter = new Intent(context, WaiterUserActivity.class);
+        starter.putExtra("type", type);
         context.startActivity(starter);
     }
 

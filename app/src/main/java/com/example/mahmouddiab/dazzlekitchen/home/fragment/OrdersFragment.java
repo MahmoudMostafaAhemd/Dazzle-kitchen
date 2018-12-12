@@ -1,6 +1,7 @@
 package com.example.mahmouddiab.dazzlekitchen.home.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
@@ -51,7 +55,7 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
     private SectionedRecyclerViewAdapter sectionAdapter;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipeRefreshLayout;
-
+    final Handler handler = new Handler();
 
     @Override
     public void onGetOrderSuccess(OrdersModel ordersModel) {
@@ -61,6 +65,7 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
         swipeRefreshLayout.setRefreshing(false);
         if (ordersModel.getData().isEmpty()) {
             emptyText.setVisibility(View.VISIBLE);
+            emptyText.setText(getString(R.string.no_active_orders));
         } else {
             emptyText.setVisibility(View.GONE);
         }
@@ -93,7 +98,12 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
         this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                orderPresenter.getOrders(UserManager.getInstance().getUser().getData().getToken());
+                if (Utils.isNetworkAvailable(getContext()))
+                    orderPresenter.getOrders(UserManager.getInstance().getUser().getData().getToken());
+                    else {
+                        Utils.showLongToast(getContext(), getString(R.string.no_net));
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
             }
         });
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -102,6 +112,24 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
                 orderPresenter.onRegisterToken(UserManager.getInstance().getUser().getData().getToken(), App.getClientId(), (task.getResult()).getToken());
             }
         });
+        Timer timer = new Timer();
+        TimerTask doAsynchronousTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @SuppressWarnings("unchecked")
+                    public void run() {
+                        try {
+                            if (Utils.isNetworkAvailable(getContext()))
+                                orderPresenter.getOrders(UserManager.getInstance().getUser().getData().getToken());
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(doAsynchronousTask, 0, 10000);
     }
 
     public void onResume() {
@@ -115,10 +143,12 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
         sectionAdapter.notifyDataSetChanged();
         if (this.sectionAdapter.getItemCount() == 0) {
             this.emptyText.setVisibility(View.VISIBLE);
+            emptyText.setText(getString(R.string.no_active_orders));
         } else {
             this.emptyText.setVisibility(View.GONE);
         }
         this.completeOrderConfirmation.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void onInProgressSuccess(OrderDoneModel orderDoneModel) {
@@ -132,6 +162,7 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
         this.sectionAdapter.notifyDataSetChanged();
         if (this.sectionAdapter.getItemCount() == 0) {
             this.emptyText.setVisibility(View.VISIBLE);
+            emptyText.setText(getString(R.string.no_active_orders));
         } else {
             this.emptyText.setVisibility(View.GONE);
         }
@@ -142,7 +173,12 @@ public class OrdersFragment extends Fragment implements OrderView, OnActionclick
 
     public void onGetOrderFailed(Error error) {
         this.progressDialog.dismiss();
-        Utils.showLongToast(getContext(), error.getTitle());
+        if (isAdded())
+            Utils.showLongToast(getContext(), getString(R.string.no_net));
+        swipeRefreshLayout.setRefreshing(false);
+        if (this.sectionAdapter.getItemCount() == 0)
+            this.emptyText.setVisibility(View.VISIBLE);
+        emptyText.setText(getString(R.string.no_net));
     }
 
     public void onDoneClicked(int id, int position) {
